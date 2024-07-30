@@ -1,6 +1,17 @@
 /* eslint-disable prettier/prettier */
-export class CreatUserDto {
+
+import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+
+export class CreateUserDto {
+  @IsString()
+  @IsNotEmpty()
   name: string;
+
+  @IsEmail()
   email: string;
-  role: 'INTERN' | 'INGENEER' | 'ADMIN';
+
+  @IsEnum(['INTERN', 'ENGENEER', 'ADMIN'], {
+    message: 'Valid role required',
+  })
+  role: 'INTERN' | 'ENGENEER' | 'ADMIN';
 }
